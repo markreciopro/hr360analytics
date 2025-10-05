@@ -1,335 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Recio - Data & Business Analyst</title>
-    <!-- Inter font from Google Fonts for a clean, professional look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS is loaded from CDN for responsive styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Three.js is included for the 3D background animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        /* General body styling for font and dark background */
-        body {
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            background-color: #0E161B;
-            color: #E2E8F0;
-        }
-        /* Custom styles for a dark, professional theme */
-        .accent-line {
-            background: linear-gradient(90deg, #FF073A, #00C7FF);
-            height: 4px;
-        }
-        /* The 3D canvas is fixed to the background */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -10; /* Ensures the canvas is behind the content */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HR360Analytics | Precision in HR Data</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://i.ibb.co/tkWQRBF/image-1759677671069.jpg" type="image/png">
+  <style>
+    :root {
+      --primary: #003f5c;
+      --accent: #00b4d8;
+      --background: #f1f5f9;
+      --text: #1e293b;
+      --white: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+    }
+
+    header {
+      background-color: var(--white);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      max-width: 300px;
+      height: auto;
+      animation: fadeZoom 1.2s ease-out;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 6px var(--accent));
+    }
+
+    @keyframes fadeZoom {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-top: 1rem;
+      height: 1.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid var(--accent);
+      animation: typing 3s steps(30, end), blink 0.7s step-end infinite;
+      display: inline-block;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-top: 2rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    }
+
+    .tech-section, .timeline-section, .why-section, .contact-section {
+      background-color: var(--white);
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 900px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
+
+    .timeline-step {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-step h3 {
+      margin-bottom: 0.3rem;
+      color: var(--primary);
+    }
+
+    .contact-info {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      line-height: 1.8;
+    }
+
+    footer {
+      background-color: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
-<body class="antialiased p-4 sm:p-8 md:p-12">
+<body>
+  <header>
+    <img src="https://i.ibb.co/tkWQRBF/image-1759677671069.jpg" alt="HR360Analytics Logo" class="logo" />
+    <div class="tagline">Precision in HR Data</div>
+  </header>
 
-    <!-- 3D background canvas -->
-    <canvas id="bg-canvas"></canvas>
+  <main>
+    <h1>Precision in HR Data</h1>
+    <p>Welcome to HR360Analytics—where human resources meets data-driven clarity. We specialize in compliance, workforce insights, and reproducible analytics workflows tailored for modern HR teams.</p>
 
-    <!-- Main Container for the Resume Content -->
-    <div class="relative max-w-4xl mx-auto bg-[#1A252E] shadow-xl rounded-2xl overflow-hidden z-10">
-        
-        <!-- Header Section -->
-        <header class="p-6 sm:p-8 bg-[#2C3B4A] rounded-t-2xl">
-            <!-- Profile Photo -->
-            <div class="flex justify-center mb-4">
-                <img src="https://i.ibb.co/4whnWLjQ/Mark-Recio-Picture.jpg" alt="Professional headshot of Mark Recio" class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-gray-600 shadow-lg transition-transform duration-300 hover:scale-105">
-            </div>
-            <h1 class="text-4xl sm:text-5xl font-bold text-white text-center mb-2 leading-tight">Mark Anthony Recio</h1>
-            <p class="text-xl font-medium text-gray-300 text-center">Data & Business Analyst</p>
-            <!-- Contact Information Section -->
-            <div class="mt-4 text-gray-400 text-sm sm:text-base space-y-2">
-                <p class="flex items-center gap-2">
-                    <!-- Location Icon SVG -->
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
-                        <circle cx="12" cy="9" r="3"></circle>
-                    </svg>
-                    Las Vegas, NV
-                </p>
-                <p class="flex items-center gap-2">
-                    <!-- Email Icon SVG -->
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
-                        <path d="M22 6L12 13 2 6"></path>
-                    </svg>
-                    mark.recio.analyzeo@gmail.com
-                </p>
-                <p class="flex items-center gap-2">
-                    <!-- Phone Icon SVG -->
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.2 2A18.5 18.5 0 0 1 2 4.2a2 2 0 0 1 2-2.2h3a2 2 0 0 1 2 2A12.5 12.5 0 0 0 9 13a12.5 12.5 0 0 0 8.8 3.8 2 2 0 0 1 2 2z"/>
-                    </svg>
-                    (702) 714-7389
-                </p>
-                <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200">
-                    <!-- Link Icon SVG -->
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
-                    Portfolio: https://markreciopro.github.io/Portfolio/
-                </a>
-            </div>
-        </header>
-
-        <!-- Main Content Area -->
-        <main class="p-6 sm:p-8 space-y-10">
-
-            <!-- Professional Summary Section -->
-            <section>
-                <h2 class="text-3xl font-semibold mb-4 text-white">Professional Summary</h2>
-                <div class="accent-line w-24 rounded-full mb-4"></div>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    Data-driven business and analytics professional with expertise in HR analytics, operations, and process optimization. Skilled at transforming complex data into actionable insights using Python, R, Power BI, Tableau, and SQL. Proven track record in forecasting trends, optimizing workflows, and delivering measurable business results.
-                </p>
-            </section>
-
-            <!-- Core Competencies Section -->
-            <section>
-                <h2 class="text-3xl font-semibold mb-4 text-white">Core Competencies</h2>
-                <div class="accent-line w-24 rounded-full mb-4"></div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300 text-base sm:text-lg">
-                    <div class="space-y-2">
-                        <h3 class="font-semibold text-white">Business Analysis</h3>
-                        <p class="ml-4">Strategic Planning, Project Coordination, Executive Reporting</p>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="font-semibold text-white">Data & HR Analytics</h3>
-                        <p class="ml-4">Predictive Modeling, Data Visualization, Performance Metrics</p>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="font-semibold text-white">Operations</h3>
-                        <p class="ml-4">Process Improvement, Workflow Optimization, Payroll Coordination</p>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="font-semibold text-white">Technology</h3>
-                        <p class="ml-4">Python, R, SQL, Power BI, Tableau, Advanced Excel, Visual Studio</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Professional Experience Section -->
-            <section>
-                <h2 class="text-3xl font-semibold mb-4 text-white">Professional Experience</h2>
-                <div class="accent-line w-24 rounded-full mb-4"></div>
-                
-                <div class="mb-8 p-6 bg-[#25323D] rounded-xl shadow-lg">
-                    <div class="flex flex-col sm:flex-row justify-between mb-2">
-                        <h3 class="text-xl font-bold text-white">Analyzeo (Contractor)</h3>
-                        <span class="text-gray-400 italic">Aug 2023 - Present</span>
-                    </div>
-                    <p class="text-gray-300 font-semibold mb-2">Data Analyst / BI Consultant | Las Vegas, NV</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-base leading-relaxed">
-                        <li>Designed and deployed interactive Power BI dashboards for HR, marketing, and campaign insights.</li>
-                        <li>Applied Python and R for predictive modeling to improve recruitment strategies and workforce allocation.</li>
-                        <li>Developed forecasting models to identify business trends and optimize resource distribution.</li>
-                    </ul>
-                </div>
-                
-                <div class="p-6 bg-[#25323D] rounded-xl shadow-lg">
-                    <div class="flex flex-col sm:flex-row justify-between mb-2">
-                        <h3 class="text-xl font-bold text-white">Bella Brite Services</h3>
-                        <span class="text-gray-400 italic">Oct 2018 - Aug 2023</span>
-                    </div>
-                    <p class="text-gray-300 font-semibold mb-2">Operations Manager Assistant | Las Vegas, NV</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-base leading-relaxed">
-                        <li>Managed staffing, scheduling, and event operations using Microsoft 365 for teams of 10-50 employees.</li>
-                        <li>Assisted with payroll, compliance, and executive reporting using Excel and automated templates.</li>
-                        <li>Analyzed performance metrics to drive efficiency improvements and reduce costs.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Education Section -->
-            <section>
-                <h2 class="text-3xl font-semibold mb-4 text-white">Education</h2>
-                <div class="accent-line w-24 rounded-full mb-4"></div>
-                <ul class="space-y-4 text-gray-300 text-lg">
-                    <li>
-                        <span class="font-bold text-white">MBA</span>, Keller Graduate School of Management - <span class="text-gray-400">Fremont, CA</span>
-                    </li>
-                    <li>
-                        <span class="font-bold text-white">Graduate Certificate</span>, Strategic Innovation & Change - <span class="text-gray-400">University of Denver, CO</span>
-                    </li>
-                    <li>
-                        <span class="font-bold text-white">B.S.</span>, Technical Management - <span class="text-gray-400">DeVry University, Fremont, CA</span>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- Certifications Section -->
-            <section>
-                <h2 class="text-3xl font-semibold mb-4 text-white">Certifications</h2>
-                <div class="accent-line w-24 rounded-full mb-4"></div>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-gray-300 text-base sm:text-lg">
-                    <li>Google Data Analytics - Google (Coursera)</li>
-                    <li>IBM Data Science Professional - IBM (Coursera)</li>
-                    <li>Microsoft Power BI Data Analyst Associate</li>
-                    <li>Tableau Business Intelligence Analyst</li>
-                    <li>Business Analytics - Univ. of Illinois (Coursera)</li>
-                    <li>Accounting Data Analytics - Univ. of Illinois (Coursera)</li>
-                    <li>Finance Data Analytics - Univ. of Illinois (Coursera)</li>
-                </ul>
-            </section>
-
-        </main>
+    <div class="tech-section">
+      <h2>Our Niche Expertise</h2>
+      <p><strong>Python for HR Automation:</strong> Scalable scripts for data cleaning, compliance checks, and predictive modeling.</p>
+      <p><strong>R Programming for Workforce Insights:</strong> Reproducible workflows for attrition modeling and equity audits.</p>
+      <p><strong>Power BI for Executive Dashboards:</strong> Interactive reports for headcount, diversity, and compliance KPIs.</p>
+      <p><strong>Tableau for Visual Storytelling:</strong> Dynamic visuals that reveal hiring, retention, and performance trends.</p>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let camera, scene, renderer, clock, mouseX = 0, mouseY = 0;
-            let windowHalfX = window.innerWidth / 2;
-            let windowHalfY = window.innerHeight / 2;
+    <div class="timeline-section">
+      <h2>HR Analytics Service Steps</h2>
+      <div class="timeline-step"><h3>1. Data Audit & Validation</h3><p>Assess data quality, structure, and completeness across HRIS, ATS, and payroll systems.</p></div>
+      <div class="timeline-step"><h3>2. Compliance Mapping</h3><p>Align datasets with EEOC, OFCCP, GDPR, and internal audit requirements.</p></div>
+      <div class="timeline-step"><h3>3. Workforce Segmentation</h3><p>Break down headcount by department, tenure, diversity, and performance tiers.</p></div>
+      <div class="timeline-step"><h3>4. Attrition & Retention Modeling</h3><p>Use R and Python to forecast turnover risk and identify retention drivers.</p></div>
+      <div class="timeline-step"><h3>5. Equity & Pay Gap Analysis</h3><p>Audit compensation fairness across gender, ethnicity, and role levels.</p></div>
+      <div class="timeline-step"><h3>6. Predictive HR Metrics</h3><p>Model future hiring needs, promotion paths, and compliance risk zones.</p></div>
+      <div class="timeline-step"><h3>7. Dashboard & Report Creation</h3><p>Design Power BI and Tableau dashboards tailored for HR, leadership, and compliance teams.</p></div>
+      <div class="timeline-step"><h3>8. Stakeholder Alignment</h3><p>Translate analytics into executive summaries and action plans for HR strategy.</p></div>
+    </div>
 
-            const CODE_SNIPPETS = [
-                "import pandas as pd",
-                "import numpy as np",
-                "import matplotlib.pyplot as plt",
-                "import seaborn as sns",
-                "from sklearn.model_selection import train_test_split",
-                "df.head()",
-                "df.info()",
-                "df.describe()",
-                "def clean_data(df):",
-                "sql_query = 'SELECT * FROM sales_data'",
-                "data_points = 1000",
-                "fig, ax = plt.subplots()"
-            ];
-            const NEON_COLORS = ["#39FF14", "#FF073A", "#00C7FF"];
-            const CODE_COUNT = 300; 
-            const codeSprites = [];
-            const time = new THREE.Clock();
+    <div class="why-section">
+      <h2>Why HR360Analytics?</h2>
+      <p><strong>Strategic Alignment:</strong> We bridge HR and business goals with data that drives decisions.</p>
+      <p><strong>Compliance Confidence:</strong> Our workflows ensure audit-readiness and regulatory clarity.</p>
+      <p><strong>Scalable Solutions:</strong> From startups to enterprise, our tools grow with your team.</p>
+      <p><strong>Visual Impact:</strong> We turn raw data into compelling stories that inspire action.</p>
+    </div>
 
+    <div class="contact-section">
+      <h2>Contact Us</h2>
+      <div class="contact-info">
+        <p><strong>Phone:</strong> (702) 714-7389</p>
+        <p><strong>Email:</strong> <a href="mailto:hr360analytics@protonmail.com">hr360analytics@protonmail.com</a></p>
+      </div>
+    </div>
 
-            // Initializes the Three.js scene and populates it with text sprites
-            function init() {
-                // Scene, Camera, and Renderer setup
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.z = 250;
+    <div class="cta">
+      Ready to transform your HR data into strategic insight? Let’s build your analytics story.
+    </div>
+  </main>
 
-                renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: document.getElementById('bg-canvas') });
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setSize(window.innerWidth, window.innerHeight);
-
-                // Create and position the text sprites
-                for (let i = 0; i < CODE_COUNT; i++) {
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    
-                    // Style the text
-                    const font = "Normal 12px Inter";
-                    context.font = font;
-                    const snippet = CODE_SNIPPETS[Math.floor(Math.random() * CODE_SNIPPETS.length)];
-                    const metrics = context.measureText(snippet);
-                    const textWidth = metrics.width;
-                    const textHeight = 14; 
-                    
-                    // Set canvas size and draw the text
-                    canvas.width = textWidth + 10;
-                    canvas.height = textHeight + 10;
-                    context.font = font;
-                    const randomColor = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
-                    context.fillStyle = randomColor;
-                    context.fillText(snippet, 5, 15);
-
-                    // Create the Three.js objects
-                    const texture = new THREE.CanvasTexture(canvas);
-                    const material = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.8 });
-                    const sprite = new THREE.Sprite(material);
-                    
-                    // Set the sprite's size and position
-                    sprite.scale.set(canvas.width * 0.5, canvas.height * 0.5, 1);
-                    sprite.position.x = Math.random() * 2000 - 1000;
-                    sprite.position.y = Math.random() * 1000 - 500;
-                    sprite.position.z = Math.random() * 2000 - 1000;
-
-                    // Store the original position and a random rotation speed
-                    sprite.userData.originalPosition = sprite.position.clone();
-                    sprite.userData.rotationSpeed = Math.random() * 0.005 + 0.001;
-                    sprite.userData.amplitude = Math.random() * 50 + 20;
-                    sprite.userData.frequency = Math.random() * 0.01 + 0.005;
-
-                    scene.add(sprite);
-                    codeSprites.push(sprite);
-                }
-
-                // Event listeners for interactivity
-                document.addEventListener('mousemove', onDocumentMouseMove, false);
-                window.addEventListener('resize', onWindowResize, false);
-            }
-
-            // Handles the animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-
-                // Update camera rotation based on mouse position
-                const targetX = mouseX * 0.001;
-                const targetY = mouseY * 0.001;
-                camera.position.x += (targetX - camera.position.x) * 0.05;
-                camera.position.y += (-targetY - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-
-                // Update sprite positions to create the floating effect
-                const delta = time.getElapsedTime();
-                codeSprites.forEach(sprite => {
-                    // Move the sprite along the Z-axis and add wave motion to X and Y
-                    sprite.position.z += 0.5;
-                    sprite.position.x = sprite.userData.originalPosition.x + sprite.userData.amplitude * Math.sin(delta * sprite.userData.frequency);
-                    sprite.position.y = sprite.userData.originalPosition.y + sprite.userData.amplitude * Math.cos(delta * sprite.userData.frequency);
-
-
-                    // If a sprite moves too far, reset its position to the back
-                    if (sprite.position.z > camera.position.z) {
-                        sprite.position.z = -1000;
-                        sprite.position.x = Math.random() * 2000 - 1000;
-                        sprite.position.y = Math.random() * 1000 - 500;
-                        sprite.userData.originalPosition = sprite.position.clone();
-                    }
-
-                    // Rotate the sprite
-                    sprite.rotation.z += sprite.userData.rotationSpeed;
-                });
-
-                renderer.render(scene, camera);
-            }
-
-            // Updates mouse coordinates
-            function onDocumentMouseMove(event) {
-                mouseX = (event.clientX - windowHalfX) * 0.1;
-                mouseY = (event.clientY - windowHalfY) * 0.1;
-            }
-
-            // Handles window resizing to keep the animation responsive
-            function onWindowResize() {
-                windowHalfX = window.innerWidth / 2;
-                windowHalfY = window.innerHeight / 2;
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-
-            // Start the animation
-            init();
-            animate();
-        });
-    </script>
+  <footer>
+    &copy; 2025 HR360Analytics. All rights reserved.
+  </footer>
 </body>
 </html>
-
